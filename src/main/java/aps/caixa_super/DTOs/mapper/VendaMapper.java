@@ -1,5 +1,6 @@
 package aps.caixa_super.DTOs.mapper;
 
+import aps.caixa_super.DTOs.response.CaixaResumoDTO;
 import aps.caixa_super.DTOs.response.VendaResponseDTO;
 import aps.caixa_super.model.Venda;
 
@@ -8,10 +9,16 @@ import java.util.stream.Collectors;
 
 public class VendaMapper {
     public static VendaResponseDTO toDTO(Venda venda) {
+        CaixaResumoDTO caixaDTO = new CaixaResumoDTO(
+                venda.getCaixa().getId(),
+                venda.getCaixa().getNome()
+        );
+
         return new VendaResponseDTO(
+                venda.getId(),
                 venda.getDataDeVenda(),
                 venda.getValorTotal(),
-                venda.getCaixa()
+                caixaDTO
         );
     }
 

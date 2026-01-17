@@ -36,41 +36,32 @@ public class VendaService {
     @Autowired
     private CaixaMapper caixaMapper;
 
-    //Colocar mapper
-
     @Transactional
     public Venda realizarVenda(VendaRequestDTO vendaRequest) {
         BigDecimal valorTotal = BigDecimal.ZERO;
 
-        for (ProdutoVendaDTO produtoVendaDTO : vendaRequest.getProdutos()) {
-            // Busca o produto no banco de dados
-            Produto produto = produtoRepository.findById(produtoVendaDTO.getProdutoId())
-                    .orElseThrow(() -> new IllegalArgumentException("Produto não encontrado com ID: " + produtoVendaDTO.getProdutoId()));
+        for (ProdutoVendaDTO produtoVendaDTO : vendaRequest.produtos()) {
+            Produto produto = produtoRepository.findById(produtoVendaDTO.produtoId())
+                    .orElseThrow(() -> new IllegalArgumentException("Produto não encontrado com ID: " + produtoVendaDTO.produtoId()));
 
-            // Verifica se há estoque suficiente
-            if (produto.getQuantidade() < produtoVendaDTO.getQuantidade()) {
+            if (produto.getQuantidade() < produtoVendaDTO.quantidade()) {
                     throw new IllegalArgumentException("Quantidade insuficiente do produto: " + produto.getNome());
             }
 
-            // Calcula o valor do produto na venda
             BigDecimal valorProduto = produto.getPrecoUnitario()
-                    .multiply(BigDecimal.valueOf(produtoVendaDTO.getQuantidade()));
+                    .multiply(BigDecimal.valueOf(produtoVendaDTO.quantidade()));
             valorTotal = valorTotal.add(valorProduto);
 
-            // Atualiza o estoque e salva
-            produto.setQuantidade(produto.getQuantidade() - produtoVendaDTO.getQuantidade());
+            produto.setQuantidade(produto.getQuantidade() - produtoVendaDTO.quantidade());
             produtoRepository.save(produto);
         }
 
-        // Busca o caixa pelo ID
-        Caixa caixa = caixaRepository.findById(vendaRequest.getCaixaId())
-                .orElseThrow(() -> new IllegalArgumentException("Caixa não encontrado com ID: " + vendaRequest.getCaixaId()));
+        Caixa caixa = caixaRepository.findById(vendaRequest.caixaId())
+                .orElseThrow(() -> new IllegalArgumentException("Caixa não encontrado com ID: " + vendaRequest.caixaId()));
 
-        // Atualiza o saldo do caixa
         caixa.setQuantiaArmazenada(caixa.getQuantiaArmazenada().add(valorTotal));
         caixaRepository.save(caixa);
 
-        // Criando a venda
         Venda venda = new Venda();
         venda.setDataDeVenda(LocalDateTime.now());
         venda.setValorTotal(valorTotal);
@@ -87,14 +78,10 @@ public class VendaService {
 
     @Transactional
     public ResponseEntity<Void> deletarVenda(Long vendaId) {
-        // Busca a venda para garantir que ela existe
         Venda venda = vendaRepository.findById(vendaId)
                 .orElseThrow(() -> new IllegalArgumentException("Venda não encontrada com ID: " + vendaId));
 
-        // Remove a venda do banco de dados
         vendaRepository.delete(venda);
-
-        // Retorna resposta 204 (No Content) para indicar que a operação foi bem-sucedida
         return ResponseEntity.noContent().build();
     }
 

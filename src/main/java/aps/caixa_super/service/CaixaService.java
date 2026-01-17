@@ -4,7 +4,6 @@ import aps.caixa_super.DTOs.mapper.CaixaMapper;
 import aps.caixa_super.DTOs.request.CaixaRequestDTO;
 import aps.caixa_super.model.Caixa;
 import aps.caixa_super.repository.CaixaRepository;
-import aps.caixa_super.repository.ProdutoRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,13 +15,10 @@ import java.util.List;
 public class CaixaService {
 
     @Autowired
-    CaixaRepository caixaRepository;
+    private CaixaRepository caixaRepository;
 
     @Autowired
-    CaixaMapper caixaMapper;
-
-    @Autowired
-    ProdutoRepository produtoRepository;
+    private CaixaMapper caixaMapper;
 
     public ResponseEntity<List<Caixa>> listarCaixas(){
         return ResponseEntity.ok().body(caixaRepository.findAll());
@@ -34,10 +30,16 @@ public class CaixaService {
         return caixaRepository.save(caixa);
     }
 
-    public void deletarCaixa(Long id){
-        caixaRepository.deleteById(id);
+    @Transactional
+    public boolean deletarCaixa(Long id){
+        if (caixaRepository.existsById(id)) {
+            caixaRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
+
     public boolean caixaExiste(Long id) {
-        return produtoRepository.existsById(id);
+        return caixaRepository.existsById(id);
     }
 }
