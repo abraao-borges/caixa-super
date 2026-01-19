@@ -1,4 +1,4 @@
-package aps.caixa_super.model;
+package aps.caixa_super.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

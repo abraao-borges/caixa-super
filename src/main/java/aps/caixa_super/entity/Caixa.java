@@ -1,4 +1,4 @@
-package aps.caixa_super.model;
+package aps.caixa_super.entity;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

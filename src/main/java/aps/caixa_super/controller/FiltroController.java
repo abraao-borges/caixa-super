@@ -1,6 +1,6 @@
 package aps.caixa_super.controller;
 
-import aps.caixa_super.model.Produto;
+import aps.caixa_super.entity.Produto;
 import aps.caixa_super.service.FiltroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

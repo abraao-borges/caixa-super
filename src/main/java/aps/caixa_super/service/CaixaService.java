@@ -2,7 +2,7 @@ package aps.caixa_super.service;
 
 import aps.caixa_super.DTOs.mapper.CaixaMapper;
 import aps.caixa_super.DTOs.request.CaixaRequestDTO;
-import aps.caixa_super.model.Caixa;
+import aps.caixa_super.entity.Caixa;
 import aps.caixa_super.repository.CaixaRepository;
 import aps.caixa_super.repository.ProdutoRepository;
 import jakarta.transaction.Transactional;

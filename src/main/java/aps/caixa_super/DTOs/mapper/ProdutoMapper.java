@@ -1,7 +1,7 @@
 package aps.caixa_super.DTOs.mapper;
 
 import aps.caixa_super.DTOs.request.ProdutoRequestDTO;
-import aps.caixa_super.model.Produto;
+import aps.caixa_super.entity.Produto;
 import org.springframework.stereotype.Component;
 
 @Component

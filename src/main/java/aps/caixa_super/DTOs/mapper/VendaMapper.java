@@ -1,7 +1,7 @@
 package aps.caixa_super.DTOs.mapper;
 
 import aps.caixa_super.DTOs.response.VendaResponseDTO;
-import aps.caixa_super.model.Venda;
+import aps.caixa_super.entity.Venda;
 
 import java.util.List;
 import java.util.stream.Collectors;

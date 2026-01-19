@@ -1,6 +1,6 @@
 package aps.caixa_super.service;
 
-import aps.caixa_super.model.Gerente;
+import aps.caixa_super.entity.Gerente;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;

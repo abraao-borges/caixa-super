@@ -1,8 +1,7 @@
-package aps.caixa_super.model;
+package aps.caixa_super.entity;
 
 import java.math.BigDecimal;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;

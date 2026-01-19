@@ -1,10 +1,9 @@
 package aps.caixa_super.controller;
 
 import aps.caixa_super.DTOs.request.CaixaRequestDTO;
-import aps.caixa_super.model.Caixa;
+import aps.caixa_super.entity.Caixa;
 import aps.caixa_super.service.CaixaService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
