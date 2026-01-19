@@ -5,8 +5,7 @@ import aps.caixa_super.DTOs.mapper.VendaMapper;
 import aps.caixa_super.DTOs.request.ProdutoVendaDTO;
 import aps.caixa_super.DTOs.request.VendaRequestDTO;
 import aps.caixa_super.DTOs.response.VendaResponseDTO;
-import aps.caixa_super.model.Produto;
-import aps.caixa_super.model.Venda;
+import aps.caixa_super.entity.*;
 import aps.caixa_super.repository.ProdutoRepository;
 import aps.caixa_super.repository.VendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +16,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
-
-import aps.caixa_super.model.Caixa;
 import aps.caixa_super.repository.CaixaRepository;
 
 @Service

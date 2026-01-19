@@ -2,7 +2,7 @@ package aps.caixa_super.controller;
 
 import aps.caixa_super.DTOs.request.DadosAutenticacao;
 import aps.caixa_super.DTOs.response.DadosTokenJWT;
-import aps.caixa_super.model.Gerente;
+import aps.caixa_super.entity.Gerente;
 import aps.caixa_super.service.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +23,11 @@ public class AutenticacaoController {
 
     @Autowired
     private TokenService tokenService;
-    @Autowired
+    
     public AutenticacaoController(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
+    
     @PostMapping
     public ResponseEntity efetuarLoin(@RequestBody @Valid DadosAutenticacao dados) {
         var token = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());

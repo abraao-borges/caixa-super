@@ -1,7 +1,6 @@
 package aps.caixa_super.DTOs.response;
 
-import aps.caixa_super.model.Caixa;
-import aps.caixa_super.model.Venda;
+import aps.caixa_super.entity.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
