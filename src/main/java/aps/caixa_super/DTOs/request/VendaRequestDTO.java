@@ -8,7 +8,6 @@ import java.util.List;
 public record VendaRequestDTO(
         @NotNull(message = "O ID do caixa é obrigatório")
         Long caixaId,
-
         @NotEmpty(message = "A venda deve conter pelo menos um produto")
         @Valid
         List<ProdutoVendaDTO> produtos
