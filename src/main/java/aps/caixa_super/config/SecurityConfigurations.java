@@ -22,9 +22,10 @@ public class SecurityConfigurations {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(csrf -> csrf.disable())
+                .headers(headers -> headers.frameOptions(frame -> frame.disable()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/Login", "/swagger-ui/**", "/v3/api-docs/**", "/filtro/**").permitAll() // Agora permite acesso ao "/filtro/**"
+                        .requestMatchers("/Login", "/swagger-ui/**", "/v3/api-docs/**", "/filtro/**", "/h2-console/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
