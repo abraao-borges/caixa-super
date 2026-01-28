@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class CaixaMapper {
     public Caixa toEntity (CaixaRequestDTO caixaRequestDTO){
         Caixa caixa = new Caixa();
-        caixa.setNome(caixaRequestDTO.getNome());
+        caixa.setNome(caixaRequestDTO.nome());
         return caixa;
     }
 }

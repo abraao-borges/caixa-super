@@ -9,10 +9,10 @@ public class ProdutoMapper {
 
     public Produto toEntity (ProdutoRequestDTO produtoRequestDTO){
         Produto produto = new Produto();
-        produto.setNome(produtoRequestDTO.getNome());
-        produto.setQuantidade(produtoRequestDTO.getQuantidade());
-        produto.setPrecoUnitario(produtoRequestDTO.getPrecoUnitario());
-        produto.setTipo(produtoRequestDTO.getTipo());
+        produto.setNome(produtoRequestDTO.nome());
+        produto.setQuantidade(produtoRequestDTO.quantidade());
+        produto.setPrecoUnitario(produtoRequestDTO.precoUnitario());
+        produto.setTipo(produtoRequestDTO.tipo());
 
         return produto;
     }

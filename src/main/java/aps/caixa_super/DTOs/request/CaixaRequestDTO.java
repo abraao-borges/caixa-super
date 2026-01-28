@@ -1,8 +1,8 @@
 package aps.caixa_super.DTOs.request;
 
-import lombok.Data;
+import jakarta.validation.constraints.NotBlank;
 
-@Data
-public class CaixaRequestDTO {
-    String nome;
-}
+public record CaixaRequestDTO(
+        @NotBlank(message = "O nome do caixa é obrigatório")
+        String nome
+) {}

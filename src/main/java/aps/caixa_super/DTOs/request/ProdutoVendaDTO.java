@@ -1,11 +1,12 @@
 package aps.caixa_super.DTOs.request;
 
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
-@Getter
-@Setter
-public class ProdutoVendaDTO {
-    private Long produtoId;
-    private double quantidade;
-}
+public record ProdutoVendaDTO(
+        @NotNull(message = "O ID do produto é obrigatório")
+        Long produtoId,
+
+        @Positive(message = "A quantidade deve ser maior que zero")
+        double quantidade
+) {}

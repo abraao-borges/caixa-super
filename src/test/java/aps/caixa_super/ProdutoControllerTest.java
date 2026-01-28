@@ -1,11 +1,19 @@
-package aps.caixa_super.controller;
+package aps.caixa_super;
 
-import aps.caixa_super.model.Produto;
 import aps.caixa_super.repository.ProdutoRepository;
+import aps.caixa_super.controller.ProdutoController;
+import aps.caixa_super.entity.Produto;
 import aps.caixa_super.repository.GerenteRepository; // Adicione este import
 import aps.caixa_super.service.ProdutoService;
 import aps.caixa_super.service.TokenService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.List;
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +23,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.List;
-import java.util.Optional;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(ProdutoController.class)
 @AutoConfigureMockMvc(addFilters = false)

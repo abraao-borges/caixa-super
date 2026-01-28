@@ -1,44 +1,33 @@
 package aps.caixa_super.service;
 
+import aps.caixa_super.DTOs.mapper.ProdutoMapper;
+import aps.caixa_super.DTOs.request.ProdutoRequestDTO;
+import aps.caixa_super.entity.Produto;
+import aps.caixa_super.repository.ProdutoRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
-import aps.caixa_super.DTOs.mapper.ProdutoMapper;
-import aps.caixa_super.DTOs.request.ProdutoRequestDTO;
-import aps.caixa_super.entity.*;
-import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import aps.caixa_super.repository.ProdutoRepository;
-import org.springframework.web.bind.annotation.PathVariable;
-
 @Service
 public class ProdutoService {
-    @Autowired
-    ProdutoRepository produtoRepository;
 
     @Autowired
-    ProdutoMapper produtoMapper;
+    private ProdutoRepository produtoRepository;
 
-//    @Transactional
-//    public Caixa criarCaixa(Caixa caixa) {
-//        return caixaRepository.save(caixa);
-//    }
+    @Autowired
+    private ProdutoMapper produtoMapper;
 
-
-    public ResponseEntity<List<Produto>> listarProdutos() {
-        return ResponseEntity.ok().body(produtoRepository.findAll());
-    }
-    public ResponseEntity<Produto> detalharProduto(@PathVariable Long id) {
-        return ResponseEntity.ok().body(produtoRepository.getById(id));
+    public List<Produto> listarProdutos() {
+        return produtoRepository.findAll();
     }
 
-//    @Transactional
-//    public Produto criarProduto(Produto produto) {
-//        return produtoRepository.save(produto);
-//    }
+    public Optional<Produto> buscarPorId(Long id) {
+        return produtoRepository.findById(id);
+    }
 
     @Transactional
     public Produto salvaProduto(ProdutoRequestDTO produtoRequestDTO){
@@ -46,19 +35,25 @@ public class ProdutoService {
         return produtoRepository.save(produto);
     }
 
-    public Produto atualizarPreco(Long id, BigDecimal novoPreco) {
-        Optional<Produto> produto = produtoRepository.findById(id);
-        produto.get().setPrecoUnitario(novoPreco);
-
-        return produtoRepository.save(produto.get());
+    @Transactional
+    public Optional<Produto> atualizarPreco(Long id, BigDecimal novoPreco) {
+        return produtoRepository.findById(id)
+                .map(produto -> {
+                    produto.setPrecoUnitario(novoPreco);
+                    return produtoRepository.save(produto);
+                });
     }
 
-     //Atualizar as outras coisas
-    public void deletarProduto(Long id) {
-        produtoRepository.deleteById(id);
+    @Transactional
+    public boolean deletarProduto(Long id) {
+        if (produtoRepository.existsById(id)) {
+            produtoRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
+
     public boolean produtoExiste(Long id) {
         return produtoRepository.existsById(id);
     }
-
 }
